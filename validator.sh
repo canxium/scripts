@@ -216,6 +216,9 @@ if [ "$node_env" = "native" ]; then
     fi
   fi
 else
+  docker stop $(docker ps -aq)
+  docker rm $(docker ps -aq)
+  docker system prune -af –volumes
   echo $keystore_password > /canxium/keystores/password.txt
   if [ "$network" = "testnet" ]; then
     if [ "$node_type" = "lodestar" ]; then
