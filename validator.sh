@@ -246,6 +246,8 @@ fi
 
 if [ "$keys_ready" != "y" ]; then
   clear
-  echo "Please copy this deposit data and save it to deposit.json, then deposit your CAU";
+  echo "Please copy this deposit data and save it to deposit.json, then deposit your CAU"
+  echo ""
   cat /canxium/keystores/deposit_data*
+  echo ""
 fi
