@@ -218,7 +218,7 @@ if [ "$node_env" = "native" ]; then
 else
   docker stop $(docker ps -aq)
   docker rm $(docker ps -aq)
-  docker system prune -af –volumes
+  docker system prune -a -f
   echo $keystore_password > /canxium/keystores/password.txt
   if [ "$network" = "testnet" ]; then
     if [ "$node_type" = "lodestar" ]; then
@@ -252,5 +252,6 @@ if [ "$keys_ready" != "y" ]; then
   echo "Please copy this deposit data and save it to deposit.json, then deposit your CAU"
   echo ""
   cat /canxium/keystores/deposit_data*
+  echo ""
   echo ""
 fi
