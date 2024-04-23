@@ -78,12 +78,12 @@ else
 fi
 
 echo "Installing golang..."
+sudo apt install snapd -y
 sudo snap install go --channel=1.22 --classic
 echo "Installing system packages..."
 sudo apt install build-essential -y
 sudo apt install git -y
 sudo apt install unzip -y
-sudo apt install snapd -y
 
 if [ "$node_env" = "native" ]; then
   systemctl stop node
