@@ -83,6 +83,7 @@ echo "Installing system packages..."
 sudo apt install build-essential -y
 sudo apt install git -y
 sudo apt install unzip -y
+sudo apt install snapd -y
 
 if [ "$node_env" = "native" ]; then
   systemctl stop node
