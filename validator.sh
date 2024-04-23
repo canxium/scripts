@@ -104,10 +104,10 @@ if [ "$node_env" = "native" ]; then
     arch=$(uname -i)
     if [[ $arch == x86_64* ]]; then
       echo "X64 Architecture"
-      mkdir -p /root/lighthouse/target/release
-      cd /root/lighthouse/target/release && wget https://github.com/canxium/lighthouse/releases/download/v5.1.3/lighthouse-v5.1.3-x86_64-unknown-linux-gnu.tar.gz.zip
+      mkdir -p /canxium/lighthouse/target/release
+      cd /canxium/lighthouse/target/release && wget https://github.com/canxium/lighthouse/releases/download/v5.1.3/lighthouse-v5.1.3-x86_64-unknown-linux-gnu.tar.gz.zip
       unzip lighthouse-v5.1.3-x86_64-unknown-linux-gnu.tar.gz.zip
-      tar -zxvf lighthouse-v5.1.3-x86_64-unknown-linux-gnu.tar.gz.zip
+      tar -zxvf lighthouse-v5.1.3-x86_64-unknown-linux-gnu.tar.gz
       chmod a+x lighthouse
       cd ~
     else
@@ -115,6 +115,10 @@ if [ "$node_env" = "native" ]; then
       source "$HOME/.cargo/env"
       sudo apt install libclang-dev -y
       sudo apt install cmake -y
+      git clone https://github.com/canxium/lighthouse.git /canxium/lighthouse
+      cd /canxium/lighthouse
+      make
+      cd ~
     fi
   fi
 
@@ -142,13 +146,6 @@ if [ "$node_env" = "native" ]; then
     go build -o=./build/bin/beacon-chain ./cmd/beacon-chain && go build -o=./build/bin/validator ./cmd/validator
     cd ~
   fi
-  if [ "$node_type" = "lighthouse" ]; then
-    git clone https://github.com/canxium/lighthouse.git /canxium/lighthouse
-    cd /canxium/lighthouse
-    make
-    cd ~
-  fi
-
 
   # init and run
   openssl rand -hex 32 | tr -d "\n" > "/canxium/jwt.hex"
@@ -211,7 +208,7 @@ if [ "$node_env" = "native" ]; then
         [Service]
         User=root
         WorkingDirectory=/canxium/prysm
-        ExecStart=/canxium/prysm/build/bin/beacon-chain --datadir=/data --execution-endpoint=http://127.0.0.1:8551 --jwt-secret=/canxium/jwt.hex --accept-terms-of-use --verbosity info --praseody --checkpoint-sync-url https://pr-beacon.canxium.net --grpc-gateway-host=0.0.0.0 --rpc-host=0.0.0.0 --min-sync-peers 1
+        ExecStart=/canxium/prysm/build/bin/beacon-chain --datadir=/canxium/beacon --execution-endpoint=http://127.0.0.1:8551 --jwt-secret=/canxium/jwt.hex --accept-terms-of-use --verbosity info --praseody --checkpoint-sync-url https://pr-beacon.canxium.net --grpc-gateway-host=0.0.0.0 --rpc-host=0.0.0.0 --min-sync-peers 1
 
         [Install]
         WantedBy=multi-user.target" > /etc/systemd/system/beacon.service
@@ -234,7 +231,7 @@ if [ "$node_env" = "native" ]; then
 
     if [ "$node_type" = "lighthouse" ]; then
       # import keys
-      /root/lighthouse/target/release/lighthouse account --network praseody --datadir /canxium/lighthouse_validator validator import --directory /canxium/keystores --reuse-password --password-file /canxium/keystores/password.txt
+      /root/lighthouse/target/release/lighthouse account --network praseody --datadir /canxium/lighthouse_validator validator import --directory /canxium/keystores --reuse-password --password-file /canxium/password.txt
 
       echo "[Unit]
         Description=PraseOdy Lighthouse Node
@@ -318,7 +315,7 @@ if [ "$node_env" = "native" ]; then
         [Service]
         User=root
         WorkingDirectory=/canxium/prysm
-        ExecStart=/canxium/prysm/build/bin/beacon-chain --datadir=/data --execution-endpoint=http://127.0.0.1:8551 --jwt-secret=/canxium/jwt.hex --accept-terms-of-use --verbosity info --canxium --checkpoint-sync-url https://beacon-api.canxium.org --grpc-gateway-host=0.0.0.0 --rpc-host=0.0.0.0 --min-sync-peers 1
+        ExecStart=/canxium/prysm/build/bin/beacon-chain --datadir=/canxium/beacon --execution-endpoint=http://127.0.0.1:8551 --jwt-secret=/canxium/jwt.hex --accept-terms-of-use --verbosity info --canxium --checkpoint-sync-url https://beacon-api.canxium.org --grpc-gateway-host=0.0.0.0 --rpc-host=0.0.0.0 --min-sync-peers 1
 
         [Install]
         WantedBy=multi-user.target" > /etc/systemd/system/beacon.service
@@ -340,7 +337,7 @@ if [ "$node_env" = "native" ]; then
     fi
 
     if [ "$node_type" = "lighthouse" ]; then
-      /root/lighthouse/target/release/lighthouse account --network canxium --datadir /canxium/lighthouse_validator validator import --directory /canxium/keystores --reuse-password --password-file /canxium/keystores/password.txt
+      /canxium/lighthouse/target/release/lighthouse account --network canxium --datadir /canxium/lighthouse_validator validator import --directory /canxium/keystores --reuse-password --password-file /canxium/password.txt
 
       echo "[Unit]
         Description=PraseOdy Lighthouse Node
@@ -348,7 +345,7 @@ if [ "$node_env" = "native" ]; then
         [Service]
         User=root
         WorkingDirectory=/canxium/lighthouse
-        ExecStart=/root/lighthouse/target/release/lighthouse bn --network canxium --execution-endpoint http://127.0.0.1:8551 --execution-jwt /canxium/jwt.hex --http --debug-level info --datadir /canxium/lighthouse_node --checkpoint-sync-url https://beacon-api.canxium.org
+        ExecStart=/canxium/lighthouse/target/release/lighthouse bn --network canxium --execution-endpoint http://127.0.0.1:8551 --execution-jwt /canxium/jwt.hex --http --debug-level info --datadir /canxium/lighthouse_node --checkpoint-sync-url https://beacon-api.canxium.org
 
         [Install]
         WantedBy=multi-user.target" > /etc/systemd/system/beacon.service
@@ -361,7 +358,7 @@ if [ "$node_env" = "native" ]; then
         [Service]
         User=root
         WorkingDirectory=/canxium/lighthouse
-        ExecStart=/root/lighthouse/target/release/lighthouse vc --network canxium --suggested-fee-recipient $withdrawal_address --datadir /canxium/lighthouse_validator --debug-level info
+        ExecStart=/canxium/lighthouse/target/release/lighthouse vc --network canxium --suggested-fee-recipient $withdrawal_address --datadir /canxium/lighthouse_validator --debug-level info
 
         [Install]
         WantedBy=multi-user.target" > /etc/systemd/system/validator.service
