@@ -85,7 +85,7 @@ if [ "$node_env" = "native" ]; then
   sudo apt install build-essential -y
   sudo apt install git -y
   sudo apt install unzip -y
-  
+
   systemctl stop node
   systemctl stop beacon
   systemctl stop validator
@@ -387,19 +387,19 @@ else
     fi
     if [ "$node_type" = "lighthouse" ]; then
       cd /canxium
-      curl -o /canxium/docker-compose.validator.yml https://raw.githubusercontent.com/canxium/lighthouse/main/docker-compose.praseody.validator.yml
+      curl -o /canxium/docker-compose.praseody.validator.yml https://raw.githubusercontent.com/canxium/lighthouse/main/docker-compose.praseody.validator.yml
       docker compose -f docker-compose.praseody.validator.yml up -d
     fi
   else
     # mainnet
     if [ "$node_type" = "lodestar" ]; then
       cd /canxium
-      curl -o /canxium/docker-compose.praseody.validator.yml https://raw.githubusercontent.com/canxium/lodestar/main/docker-compose.validator.yml
+      curl -o /canxium/docker-compose.validator.yml https://raw.githubusercontent.com/canxium/lodestar/main/docker-compose.validator.yml
       docker compose -f docker-compose.validator.yml up -d
     fi
     if [ "$node_type" = "prysm" ]; then
       cd /canxium
-      curl -o /canxium/docker-compose.praseody.validator.yml https://raw.githubusercontent.com/canxium/prysm/main/docker-compose.validator.yml
+      curl -o /canxium/docker-compose.validator.yml https://raw.githubusercontent.com/canxium/prysm/main/docker-compose.validator.yml
       docker compose -f docker-compose.validator.yml up -d
     fi
     if [ "$node_type" = "lighthouse" ]; then
