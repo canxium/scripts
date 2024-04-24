@@ -3,7 +3,7 @@
 read -p "Enter: NUM_VALIDATORS = " num_validator
 read -p "Enter: KEYSTORE_PASSWORD = " keystore_password
 read -p "Enter: WITHDRAWAL_ADDRESS = " withdrawal_address
-read -p "Node type: lodestar (nodejs) or prysm (golang) or lighthouse (rust): (lodestar/prysm/lighthouse) " node_type
+read -p "Node type: lighthouse (rust - best performance) or lodestar (nodejs - stable) or prysm (golang): (lighthouse/lodestar/prysm) " node_type
 if [ "$node_type" != "lodestar" ] && [ "$node_type" != "prysm" ] && [ "$node_type" != "lighthouse" ]; then
   echo "Invalid node type!"
   exit 1
