@@ -159,7 +159,7 @@ if [ "$node_env" = "native" ]; then
       [Service]
       User=root
       WorkingDirectory=/root
-      ExecStart=/canxium/go-canxium/build/bin/canxium --http --db.engine=pebble --syncmode full --authrpc.addr 127.0.0.1 --authrpc.jwtsecret=/canxium/jwt.hex --authrpc.vhosts=canxium --networkid 30203 --datadir /canxium/chain --bootnodes enode://9046044c5d6801d927ddaace0bc96dafa8999f8f5ee6e10bb91bc96bc80347afa77152d7a95c16d247d0faf17323850ca8c4cdd6845138014cc5c5c93fee5323@195.35.45.155:30303,enode://7918d918a36654eeaa860870dbad186553823aa386896b3326a0e8ba1cd60ed78242fad33f691248e1554c87237fb90da70eaa149fe04e7541809e4a835fbd14@15.235.141.136:30303
+      ExecStart=/canxium/go-canxium/build/bin/canxium --http --db.engine=pebble --syncmode full --authrpc.addr 127.0.0.1 --authrpc.jwtsecret=/canxium/jwt.hex --networkid 30203 --datadir /canxium/chain --bootnodes enode://9046044c5d6801d927ddaace0bc96dafa8999f8f5ee6e10bb91bc96bc80347afa77152d7a95c16d247d0faf17323850ca8c4cdd6845138014cc5c5c93fee5323@195.35.45.155:30303,enode://7918d918a36654eeaa860870dbad186553823aa386896b3326a0e8ba1cd60ed78242fad33f691248e1554c87237fb90da70eaa149fe04e7541809e4a835fbd14@15.235.141.136:30303
       Restart=always
 
       [Install]
@@ -268,7 +268,7 @@ if [ "$node_env" = "native" ]; then
       [Service]
       User=root
       WorkingDirectory=/root
-      ExecStart=/canxium/go-canxium/build/bin/canxium --http --db.engine=pebble --syncmode full --authrpc.addr 127.0.0.1 --authrpc.jwtsecret=/canxium/jwt.hex --authrpc.vhosts=canxium --networkid 3003 --datadir /canxium/chain --bootnodes enode://314f1041da4b27f5e4c02b4eac52ca7bd2f025cb585490cb7032fdb08db737aa10d7d64a780db697643ece6027d3bc1a511696420e76192648c0d2d74d099c73@boot.canxium.net:30303,enode://767d3e408b073ca501ea7336096c048eea46513ac5c44659ac902d7575881ca114c82277dff7826630ec9fb45d8cfa5a82b9eacc8b477dc475746eaec39e2f2a@boot.canxium.org:30303,enode://f06de34b87954abb25be2e8d592306bc55b396a4eead839dba90baf4e59465d3ef704866962cf2fd995e6ce04f17de31edebb11afcac9df4eaea847f35e3cbaf@boot-n2.canxium.org:30303
+      ExecStart=/canxium/go-canxium/build/bin/canxium --http --db.engine=pebble --syncmode full --authrpc.addr 127.0.0.1 --authrpc.jwtsecret=/canxium/jwt.hex --networkid 3003 --datadir /canxium/chain --bootnodes enode://314f1041da4b27f5e4c02b4eac52ca7bd2f025cb585490cb7032fdb08db737aa10d7d64a780db697643ece6027d3bc1a511696420e76192648c0d2d74d099c73@boot.canxium.net:30303,enode://767d3e408b073ca501ea7336096c048eea46513ac5c44659ac902d7575881ca114c82277dff7826630ec9fb45d8cfa5a82b9eacc8b477dc475746eaec39e2f2a@boot.canxium.org:30303,enode://f06de34b87954abb25be2e8d592306bc55b396a4eead839dba90baf4e59465d3ef704866962cf2fd995e6ce04f17de31edebb11afcac9df4eaea847f35e3cbaf@boot-n2.canxium.org:30303
       Restart=always
 
       [Install]
