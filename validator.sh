@@ -80,6 +80,7 @@ fi
 if [ "$node_env" = "native" ]; then
   echo "Installing golang..."
   sudo apt install snapd -y
+  export PATH=$PATH:/snap/bin
   sudo snap install go --channel=1.22 --classic
   echo "Installing system packages..."
   sudo apt install build-essential -y
