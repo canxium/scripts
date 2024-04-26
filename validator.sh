@@ -106,8 +106,8 @@ if [ "$node_env" = "native" ]; then
       echo "X64 Architecture"
       mkdir -p /canxium/lighthouse/target/release
       cd /canxium/lighthouse/target/release && wget https://github.com/canxium/lighthouse/releases/download/v5.1.3/lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz.zip
-      unzip lighthouse-v5.1.3-x86_64-unknown-linux-gnu.tar.gz.zip
-      tar -zxvf lighthouse-v5.1.3-x86_64-unknown-linux-gnu.tar.gz
+      unzip lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz.zip
+      tar -zxvf lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz
       chmod a+x lighthouse
       cd ~
     else
