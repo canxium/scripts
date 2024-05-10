@@ -199,7 +199,7 @@ else
 
   if [ "$node_type" = "lighthouse" ]; then
     echo "[Unit]
-      Description=PraseOdy Lighthouse Node
+      Description=Lighthouse Node
 
       [Service]
       User=root
