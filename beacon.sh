@@ -16,6 +16,7 @@ rm -rf /canxium
 mkdir -p /canxium
 
 echo "Installing golang..."
+sudo apt update
 sudo apt install snapd -y
 export PATH=$PATH:/snap/bin
 sudo snap install go --channel=1.22 --classic
