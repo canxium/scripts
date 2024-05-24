@@ -55,7 +55,7 @@ if [ "$network" = "mainnet" ]; then
   make canxium
 else
   cd /canxium/go-canxium
-  git checkout dca7bec981f2bf8302b7a39439f51261c461debe
+  git checkout 43fe7a355fb679ace0e94faef84f8fa1d8a310c9
   make canxium
 fi
 
@@ -131,7 +131,7 @@ if [ "$network" = "testnet" ]; then
       [Service]
       User=root
       WorkingDirectory=/canxium/lighthouse
-      ExecStart=/root/lighthouse/target/release/lighthouse bn --network praseody --execution-endpoint http://127.0.0.1:8551 --execution-jwt /canxium/jwt.hex --http --debug-level info --datadir /canxium/lighthouse_node
+      ExecStart=/canxium/lighthouse/target/release/lighthouse bn --network praseody --execution-endpoint http://127.0.0.1:8551 --execution-jwt /canxium/jwt.hex --http --debug-level info --datadir /canxium/lighthouse_node
 
       [Install]
       WantedBy=multi-user.target" > /etc/systemd/system/beacon.service
