@@ -38,25 +38,14 @@ if [ "$node_type" = "lodestar" ]; then
 fi
 
 if [ "$node_type" = "lighthouse" ]; then
-  arch=$(uname -i)
-  if [[ $arch == x86_64* ]]; then
-    echo "X64 Architecture"
-    mkdir -p /canxium/lighthouse/target/release
-    cd /canxium/lighthouse/target/release && wget https://github.com/canxium/lighthouse/releases/download/v5.1.3/lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz.zip
-    unzip lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz.zip
-    tar -zxvf lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz
-    chmod a+x lighthouse
-    cd ~
-  else
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    source "$HOME/.cargo/env"
-    sudo apt install libclang-dev -y
-    sudo apt install cmake -y
-    git clone https://github.com/canxium/lighthouse.git /canxium/lighthouse
-    cd /canxium/lighthouse
-    make
-    cd ~
-  fi
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source "$HOME/.cargo/env"
+  sudo apt install libclang-dev -y
+  sudo apt install cmake -y
+  git clone https://github.com/canxium/lighthouse.git /canxium/lighthouse
+  cd /canxium/lighthouse
+  make
+  cd ~
 fi
 
 git clone https://github.com/canxium/go-canxium.git /canxium/go-canxium
@@ -65,7 +54,7 @@ if [ "$network" = "mainnet" ]; then
   make canxium
 else
   cd /canxium/go-canxium
-  git checkout 66487b7dc4ea72a40234826220f1fad3903aa26d
+  git checkout dca7bec981f2bf8302b7a39439f51261c461debe=
   make canxium
 fi
 
@@ -95,7 +84,7 @@ if [ "$network" = "testnet" ]; then
     [Service]
     User=root
     WorkingDirectory=/root
-    ExecStart=/canxium/go-canxium/build/bin/canxium --http --db.engine=pebble --syncmode full --authrpc.addr 127.0.0.1 --authrpc.jwtsecret=/canxium/jwt.hex --networkid 30203 --datadir /canxium/chain --bootnodes enode://9046044c5d6801d927ddaace0bc96dafa8999f8f5ee6e10bb91bc96bc80347afa77152d7a95c16d247d0faf17323850ca8c4cdd6845138014cc5c5c93fee5323@195.35.45.155:30303,enode://7918d918a36654eeaa860870dbad186553823aa386896b3326a0e8ba1cd60ed78242fad33f691248e1554c87237fb90da70eaa149fe04e7541809e4a835fbd14@15.235.141.136:30303
+    ExecStart=/canxium/go-canxium/build/bin/canxium --http --db.engine=pebble --syncmode full --authrpc.addr 127.0.0.1 --authrpc.jwtsecret=/canxium/jwt.hex --networkid 30203 --datadir /canxium/chain --bootnodes enode://b9281bc8cb07e4f997b5ae7a6cd07e0ab7018c9706aa5507d26c85e89c49c0144ebc1387def54c5346bb3c30ade2dbbdcdcf93a00ae570cb7bc74c87a9a29bae@15.235.141.136:30303,enode://ae595f3bf878303010d69a3002b8db183c98275b91d67bb9657144d19465c3c91b71ee12e5ad9547ecc1c97fc2938c1c0982744d0d72ccabd864365f4d94912f@195.35.45.155:30303
     Restart=always
 
     [Install]
@@ -112,7 +101,6 @@ if [ "$network" = "testnet" ]; then
       WorkingDirectory=/canxium/lodestar
       ExecStart=/canxium/lodestar/lodestar beacon --network praseody --dataDir /canxium/beacon --rest --rest.address 127.0.0.1 --metrics --logFile /canxium/logs/beacon.log --logFileLevel info --logLevel info --logFileDailyRotate 5 --jwtSecret /canxium/jwt.hex --execution.urls http://127.0.0.1:8551 --checkpointSyncUrl https://pr-beacon.canxium.net
       Environment=NODE_OPTIONS=--max-old-space-size=8192
-      Environment=LODESTAR_PRESET=praseody
 
       [Install]
       WantedBy=multi-user.target" > /etc/systemd/system/beacon.service
