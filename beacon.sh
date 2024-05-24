@@ -55,7 +55,7 @@ if [ "$network" = "mainnet" ]; then
   make canxium
 else
   cd /canxium/go-canxium
-  git checkout dca7bec981f2bf8302b7a39439f51261c461debe=
+  git checkout dca7bec981f2bf8302b7a39439f51261c461debe
   make canxium
 fi
 
