@@ -232,7 +232,7 @@ if [ "$node_env" = "native" ]; then
 
     if [ "$node_type" = "lighthouse" ]; then
       # import keys
-      /root/lighthouse/target/release/lighthouse account --network praseody --datadir /canxium/lighthouse_validator validator import --directory /canxium/keystores --reuse-password --password-file /canxium/password.txt
+      /canxium/lighthouse/target/release/lighthouse account --network praseody --datadir /canxium/lighthouse_validator validator import --directory /canxium/keystores --reuse-password --password-file /canxium/password.txt
 
       echo "[Unit]
         Description=PraseOdy Lighthouse Node
@@ -240,7 +240,7 @@ if [ "$node_env" = "native" ]; then
         [Service]
         User=root
         WorkingDirectory=/canxium/lighthouse
-        ExecStart=/root/lighthouse/target/release/lighthouse bn --network praseody --execution-endpoint http://127.0.0.1:8551 --execution-jwt /canxium/jwt.hex --http --debug-level info --datadir /canxium/lighthouse_node
+        ExecStart=/canxium/lighthouse/target/release/lighthouse bn --network praseody --execution-endpoint http://127.0.0.1:8551 --execution-jwt /canxium/jwt.hex --http --debug-level info --datadir /canxium/lighthouse_node
 
         [Install]
         WantedBy=multi-user.target" > /etc/systemd/system/beacon.service
@@ -253,7 +253,7 @@ if [ "$node_env" = "native" ]; then
         [Service]
         User=root
         WorkingDirectory=/canxium/lighthouse
-        ExecStart=/root/lighthouse/target/release/lighthouse vc --network praseody --suggested-fee-recipient $withdrawal_address --datadir /canxium/lighthouse_validator --debug-level info
+        ExecStart=/canxium/lighthouse/target/release/lighthouse vc --network praseody --suggested-fee-recipient $withdrawal_address --datadir /canxium/lighthouse_validator --debug-level info
 
         [Install]
         WantedBy=multi-user.target" > /etc/systemd/system/validator.service
