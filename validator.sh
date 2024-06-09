@@ -130,7 +130,7 @@ if [ "$node_env" = "native" ]; then
     make canxium
   else
     cd /canxium/go-canxium
-    git checkout 66487b7dc4ea72a40234826220f1fad3903aa26d
+    git checkout v0.2.2
     make canxium
   fi
 
