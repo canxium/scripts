@@ -102,25 +102,14 @@ if [ "$node_env" = "native" ]; then
   fi
 
   if [ "$node_type" = "lighthouse" ]; then
-    arch=$(uname -i)
-    if [[ $arch == x86_64* ]]; then
-      echo "X64 Architecture"
-      mkdir -p /canxium/lighthouse/target/release
-      cd /canxium/lighthouse/target/release && wget https://github.com/canxium/lighthouse/releases/download/v5.1.3/lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz.zip
-      unzip lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz.zip
-      tar -zxvf lighthouse-v5.1.3-x86_64-unknown-linux-gnu-portable.tar.gz
-      chmod a+x lighthouse
-      cd ~
-    else
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-      source "$HOME/.cargo/env"
-      sudo apt install libclang-dev -y
-      sudo apt install cmake -y
-      git clone https://github.com/canxium/lighthouse.git /canxium/lighthouse
-      cd /canxium/lighthouse
-      make
-      cd ~
-    fi
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source "$HOME/.cargo/env"
+    sudo apt install libclang-dev -y
+    sudo apt install cmake -y
+    git clone https://github.com/canxium/lighthouse.git /canxium/lighthouse
+    cd /canxium/lighthouse
+    make
+    cd ~
   fi
 
   git clone https://github.com/canxium/go-canxium.git /canxium/go-canxium
