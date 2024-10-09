@@ -108,6 +108,7 @@ if [ "$node_env" = "native" ]; then
     sudo apt install cmake -y
     git clone https://github.com/canxium/lighthouse.git /canxium/lighthouse
     cd /canxium/lighthouse
+    cargo update
     make
     cd ~
   fi
