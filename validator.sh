@@ -114,15 +114,9 @@ if [ "$node_env" = "native" ]; then
   fi
 
   git clone https://github.com/canxium/go-canxium.git /canxium/go-canxium
-  if [ "$network" = "mainnet" ]; then
-    cd /canxium/go-canxium
-    git checkout v0.3.3
-    make canxium
-  else
-    cd /canxium/go-canxium
-    git checkout v0.3.3
-    make canxium
-  fi
+  cd /canxium/go-canxium
+  git checkout v0.3.4
+  make canxium
 
   cd ~
   if [ "$node_type" = "lodestar" ]; then
