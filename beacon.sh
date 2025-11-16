@@ -51,7 +51,7 @@ fi
 
 git clone https://github.com/canxium/go-canxium.git /canxium/go-canxium
   cd /canxium/go-canxium
-  git checkout v0.3.4
+  git checkout v0.4.0
   make canxium
 
 cd ~
